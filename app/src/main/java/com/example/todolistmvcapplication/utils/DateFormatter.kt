@@ -9,7 +9,7 @@ import java.util.*
 object DateFormatter {
 
     val dd_MM_yyyy = "dd/MM/yyyy"
-    val dd_MM_yyyy_HH_mm = "dd/MM/yyyy HH:mm"
+    val dd_MM_yyyy_HH_mm = "dd-MM-yyyy HH:mm"
     val MMM_dd_yyyy = "MMM dd, yyyy"
 
     fun getFormattedDate(inFormat: String, strDate: String, outFormat: String): String {
