@@ -109,13 +109,6 @@ class MainActivity : AppCompatActivity() {
                 context.mEventList.addAll(eventList)
                 context.mEventAdapter.notifyDataSetChanged()
             }
-            /* if (Prefs.eventList.isNullOrEmpty()) {
-                 txtNoData.visibility = View.VISIBLE
-             } else {
-                 txtNoData.visibility = View.GONE
-                 mEventList.addAll(Prefs.eventList!!)
-                 mEventAdapter.notifyDataSetChanged()
-             }*/
         }
     }
 
