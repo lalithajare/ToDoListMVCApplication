@@ -17,7 +17,8 @@ import com.example.todolistmvcapplication.utils.MyApplication
 import com.example.todolistmvcapplication.utils.Utils
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+
 
     private lateinit var mEventAdapter: EventAdapter
     private val mEventList = ArrayList<Event>()
@@ -44,13 +45,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setViews() {
-        btnAdd.setOnClickListener {
-            AddEventActivity.beginActivityForResult(this)
-        }
+        btnAdd.setOnClickListener(this)
     }
 
     private fun setAdapter() {
-        mEventAdapter = EventAdapter(mEventList)
+        mEventAdapter = EventAdapter(mEventList, this)
         recyclerTodo.adapter = mEventAdapter
         recyclerTodo.layoutManager = LinearLayoutManager(this)
     }
@@ -58,22 +57,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setData() {
         GetEventsTask(this).execute()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK
-            && data != null && data.hasExtra(AddEventActivity.EVENT_OBJ)
-            && data.getSerializableExtra(AddEventActivity.EVENT_OBJ) != null
-        ) {
-            val event = data.getSerializableExtra(AddEventActivity.EVENT_OBJ) as Event
-            mEventList.add(event)
-            mEventAdapter.notifyItemInserted(mEventList.lastIndex)
-            txtNoData.visibility = View.GONE
-
-            InsertEventTask(this, event).execute()
-
-        }
     }
 
     /**
@@ -89,6 +72,23 @@ class MainActivity : AppCompatActivity() {
         override fun onPostExecute(bool: Boolean?) {
             if (bool!!) {
                 Utils.showToast(context.getString(R.string.event_added_to_db))
+            }
+        }
+    }
+
+    /**
+     * This task is used to update the event in DB
+     * Its used immediately after filled 'Event' object is returned by 'EditEventActivity' in 'onActivityResult()'
+     */
+    private class UpdateEventTask(var context: MainActivity, var event: Event) : AsyncTask<Void, Void, Boolean>() {
+        override fun doInBackground(vararg params: Void?): Boolean {
+            MyApplication.getInstance().eventDB!!.eventDao().updateEvent(event)
+            return true
+        }
+
+        override fun onPostExecute(bool: Boolean?) {
+            if (bool!!) {
+                Utils.showToast(context.getString(R.string.event_updated_in_db))
             }
         }
     }
@@ -111,5 +111,49 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.card_layout -> {
+                if (v.tag != null && v.tag is Event)
+                    EditEventActivity.beginActivityForResult(this, v.tag as Event)
+            }
+
+            R.id.btn_add -> {
+                AddEventActivity.beginActivityForResult(this)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK
+            && data != null && data.hasExtra(AddEventActivity.EVENT_OBJ)
+            && data.getSerializableExtra(AddEventActivity.EVENT_OBJ) != null
+        ) {
+            if (requestCode == AddEventActivity.REQ_ADD_EVENT) {
+                val event = data.getSerializableExtra(AddEventActivity.EVENT_OBJ) as Event
+                mEventList.add(event)
+                mEventAdapter.notifyItemInserted(mEventList.lastIndex)
+                txtNoData.visibility = View.GONE
+                InsertEventTask(this, event).execute()
+            } else if (requestCode == EditEventActivity.REQ_EDIT_EVENT) {
+                val event = data.getSerializableExtra(AddEventActivity.EVENT_OBJ) as Event
+
+                for (i in 0 until mEventList.size) {
+                    if (mEventList[i].id == event.id) {
+                        mEventList.removeAt(i)
+                        mEventList.add(i, event)
+                        mEventAdapter.notifyItemChanged(i)
+                        UpdateEventTask(this, event).execute()
+                        break
+                    }
+                }
+
+            }
+
+        }
+    }
+
 
 }

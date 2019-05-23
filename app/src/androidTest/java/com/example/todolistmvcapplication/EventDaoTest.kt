@@ -19,7 +19,22 @@ class EventDaoTest {
                     0,
                     "TestEvent",
                     Date(),
-                    "xyz event is awsome"
+                    "xyz event is awesome"
+                )
+            ), 0
+        )
+    }
+
+    //Non-zero Int return value, to test whether values are updated
+    @Test
+    fun updateEventTest() {
+        assertNotEquals(
+            MyApplication.getInstance().eventDB!!.eventDao().updateEvent(
+                Event(
+                    1,
+                    "TestEvent",
+                    Date(),
+                    "xyz event is awesome"
                 )
             ), 0
         )

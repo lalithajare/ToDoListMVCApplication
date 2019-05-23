@@ -6,13 +6,13 @@ import com.example.todolistmvcapplication.R
 import com.example.todolistmvcapplication.models.Event
 import com.example.todolistmvcapplication.utils.DateFormatter
 
-class EventViewHolder(itemView: View) : ViewHolder(itemView) {
+class EventViewHolder(var mView: View, var listener: View.OnClickListener) : ViewHolder(mView) {
 
     private var mEvent: Event? = null
 
-    private val txtEventName: TextView = itemView.findViewById(R.id.txt_event_name)
-    private val txtEventTime: TextView = itemView.findViewById(R.id.txt_event_time)
-    private val txtEventDescription: TextView = itemView.findViewById(R.id.txt_event_description)
+    private val txtEventName: TextView = mView.findViewById(R.id.txt_event_name)
+    private val txtEventTime: TextView = mView.findViewById(R.id.txt_event_time)
+    private val txtEventDescription: TextView = mView.findViewById(R.id.txt_event_description)
 
     override fun onBindView(model: Any) {
         mEvent = model as Event?
@@ -25,5 +25,9 @@ class EventViewHolder(itemView: View) : ViewHolder(itemView) {
 
         if (!mEvent?.eventDescription.isNullOrEmpty())
             txtEventDescription.text = mEvent?.eventDescription
+
+        mView.tag = mEvent
+        mView.setOnClickListener(listener)
+
     }
 }

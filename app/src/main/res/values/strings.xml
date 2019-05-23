@@ -12,4 +12,6 @@
     <string name="plz_select_proper_event_time">Please select proper event time</string>
     <string name="no_events_to_show">No events to show</string>
     <string name="event_added_to_db">Event added to database</string>
+    <string name="edit_event">Edit Event</string>
+    <string name="event_updated_in_db">Event updated in DB</string>
 </resources>

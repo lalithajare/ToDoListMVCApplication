@@ -9,6 +9,7 @@
             android:id="@+id/recycler_todo"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/dimen_size_80"
+            android:background="@color/grey_shade_02"
             android:paddingTop="@dimen/dimen_size_20"
             android:layout_marginLeft="@dimen/dimen_size_10"
             android:layout_marginRight="@dimen/dimen_size_10"
