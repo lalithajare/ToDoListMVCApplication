@@ -12,10 +12,8 @@ import android.view.View
 import android.widget.TextView
 import com.example.todolistmvcapplication.R
 import com.example.todolistmvcapplication.adapters.EventAdapter
-import com.example.todolistmvcapplication.database.EventDatabase
 import com.example.todolistmvcapplication.models.Event
 import com.example.todolistmvcapplication.utils.MyApplication
-import com.example.todolistmvcapplication.utils.Prefs
 import com.example.todolistmvcapplication.utils.Utils
 import kotlin.collections.ArrayList
 
@@ -59,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setData() {
-        GetEventsFromDb(this).execute()
+        GetEventsTask(this).execute()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -73,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             mEventAdapter.notifyItemInserted(mEventList.lastIndex)
             txtNoData.visibility = View.GONE
 
-            InsertTask(this, event).execute()
+            InsertEventTask(this, event).execute()
 
         }
     }
@@ -82,7 +80,7 @@ class MainActivity : AppCompatActivity() {
      * This task is used to add the event in DB
      * Its used immediately after filled 'Event' object is returned by 'AddEventActivity' in 'onActivityResult()'
      */
-    private class InsertTask(var context: MainActivity, var event: Event) : AsyncTask<Void, Void, Boolean>() {
+    private class InsertEventTask(var context: MainActivity, var event: Event) : AsyncTask<Void, Void, Boolean>() {
         override fun doInBackground(vararg params: Void?): Boolean {
             MyApplication.getInstance().eventDB!!.eventDao().insertEvent(event)
             return true
@@ -98,7 +96,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * This task is used to fill the events list at beginning
      */
-    private class GetEventsFromDb(var context: MainActivity) : AsyncTask<Void, Void, List<Event>>() {
+    private class GetEventsTask(var context: MainActivity) : AsyncTask<Void, Void, List<Event>>() {
         override fun doInBackground(vararg params: Void?): List<Event> {
             return MyApplication.getInstance().eventDB!!.eventDao().getEvents()
         }
