@@ -75,6 +75,7 @@ class AddEventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         dialog.show()
     }
 
+    //After setting date, immediately the 'TimPickerDialogue' is shown to select time.
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         val calendar = Calendar.getInstance(TimeZone.getDefault())
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -95,6 +96,7 @@ class AddEventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         mTimePicker.show()
     }
 
+    //The time selected by User is set to the 'Date' object where the date was set previously
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         val calendar = Calendar.getInstance(TimeZone.getDefault())
         calendar.time = mSelectedDate
@@ -112,7 +114,7 @@ class AddEventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         return super.onCreateOptionsMenu(menu)
     }
 
-
+    //Event Model is filled with data and returned to previous screen -> 'MainActivity'
     private fun prepareEventModel(): Event? {
         //Check for empty event name
         if (edtEventName.text.toString().trim().isEmpty()) {

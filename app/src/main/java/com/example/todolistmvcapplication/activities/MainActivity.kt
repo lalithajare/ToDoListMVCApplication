@@ -78,6 +78,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This task is used to add the event in DB
+     * Its used immediately after filled 'Event' object is returned by 'AddEventActivity' in 'onActivityResult()'
+     */
     private class InsertTask(var context: MainActivity, var event: Event) : AsyncTask<Void, Void, Boolean>() {
         override fun doInBackground(vararg params: Void?): Boolean {
             MyApplication.getInstance().eventDB!!.eventDao().insertEvent(event)
@@ -91,6 +95,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This task is used to fill the events list at beginning
+     */
     private class GetEventsFromDb(var context: MainActivity) : AsyncTask<Void, Void, List<Event>>() {
         override fun doInBackground(vararg params: Void?): List<Event> {
             return MyApplication.getInstance().eventDB!!.eventDao().getEvents()
