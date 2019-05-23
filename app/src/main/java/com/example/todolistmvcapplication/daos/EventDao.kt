@@ -19,4 +19,8 @@ interface EventDao {
 
     @Query("SELECT * FROM events")
     fun getEvents(): List<Event>
+
+    @Query("SELECT * FROM events WHERE id=1")
+    fun getFirstEvent(): Event
+
 }
