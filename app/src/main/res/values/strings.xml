@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TodoList</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_description">Event Description</string>
+    <string name="event_time">Event Time</string>
+    <string name="select">Select</string>
+    <string name="add_event">Add Event</string>
+    <string name="to_do_list">ToDo List</string>
+    <string name="done">Done</string>
+    <string name="plz_enter_event_name">Please enter event name</string>
+    <string name="plz_enter_event_description">Please enter event description</string>
+    <string name="plz_select_proper_event_time">Please select proper event time</string>
+    <string name="no_events_to_show">No events to show</string>
+    <string name="event_added_to_db">Event added to database</string>
+</resources>
