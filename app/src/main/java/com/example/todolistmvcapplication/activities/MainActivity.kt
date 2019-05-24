@@ -19,6 +19,11 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
+    companion object {
+        fun beginActivity(activity: AppCompatActivity) {
+            activity.startActivity(Intent(activity, MainActivity::class.java))
+        }
+    }
 
     private lateinit var mEventAdapter: EventAdapter
     private val mEventList = ArrayList<Event>()

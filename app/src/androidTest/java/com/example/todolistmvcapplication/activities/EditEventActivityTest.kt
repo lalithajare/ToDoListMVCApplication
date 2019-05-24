@@ -1,4 +1,4 @@
-package com.example.todolistmvcapplication
+package com.example.todolistmvcapplication.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -15,8 +15,6 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.rule.ActivityTestRule
 import android.view.View
 import android.widget.TextView
-import com.example.todolistmvcapplication.activities.AddEventActivity
-import com.example.todolistmvcapplication.activities.EditEventActivity
 import com.example.todolistmvcapplication.utils.DateFormatter
 import com.example.todolistmvcapplication.utils.MyApplication
 import org.hamcrest.Matcher
@@ -24,9 +22,9 @@ import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
 import java.util.*
-import com.example.todolistmvcapplication.activities.MainActivity
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.intent.Intents
+import com.example.todolistmvcapplication.R
 
 
 class EditEventActivityTest {

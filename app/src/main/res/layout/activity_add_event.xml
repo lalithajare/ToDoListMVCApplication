@@ -18,6 +18,7 @@
             android:id="@+id/edt_event_name"
             android:layout_marginTop="@dimen/dimen_size_5"
             android:padding="@dimen/dimen_size_10"
+            android:layout_width="match_parent"
             android:background="@drawable/edittext_border"
             style="@style/TextStyle"/>
 
@@ -57,6 +58,7 @@
     <EditText
             android:id="@+id/edt_event_description"
             android:lines="6"
+            android:layout_width="match_parent"
             android:gravity="top"
             android:layout_marginTop="@dimen/dimen_size_5"
             android:padding="@dimen/dimen_size_10"

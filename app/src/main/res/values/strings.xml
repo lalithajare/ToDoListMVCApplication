@@ -14,4 +14,12 @@
     <string name="event_added_to_db">Event added to database</string>
     <string name="edit_event">Edit Event</string>
     <string name="event_updated_in_db">Event updated in DB</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="plz_enter_password">Please enter password</string>
+    <string name="plz_enter_email">Please enter email</string>
+    <string name="plz_enter_valid_email">Please enter valid email</string>
+    <string name="password_length_should_be_atleast_6">Password length should be atleast 6 characters</string>
 </resources>

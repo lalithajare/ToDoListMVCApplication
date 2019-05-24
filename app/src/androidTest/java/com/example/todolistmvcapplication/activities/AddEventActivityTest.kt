@@ -1,4 +1,4 @@
-package com.example.todolistmvcapplication
+package com.example.todolistmvcapplication.activities
 
 import android.support.annotation.StringRes
 import android.support.test.espresso.Espresso
@@ -7,15 +7,11 @@ import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.RootMatchers.withDecorView
-import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
 import android.view.View
-import com.example.todolistmvcapplication.activities.AddEventActivity
 import com.example.todolistmvcapplication.utils.DateFormatter
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 import java.util.*
 import android.widget.TextView
 import android.support.test.espresso.UiController
@@ -26,9 +22,7 @@ import org.hamcrest.Matchers.*
 import android.app.Activity
 import android.support.test.espresso.contrib.ActivityResultMatchers
 import android.support.test.espresso.intent.matcher.IntentMatchers
-import android.util.Log
-import junit.framework.Assert.assertTrue
-import java.lang.reflect.AccessibleObject.setAccessible
+import com.example.todolistmvcapplication.R
 
 
 class AddEventActivityTest {

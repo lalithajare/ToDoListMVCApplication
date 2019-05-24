@@ -15,6 +15,9 @@
     <dimen name="text_size_15">15sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
+    <dimen name="dimen_size_50">50dp</dimen>
+    <dimen name="dimen_size_35">35dp</dimen>
+    <dimen name="dimen_size_100">100dp</dimen>
 
 
 </resources>
