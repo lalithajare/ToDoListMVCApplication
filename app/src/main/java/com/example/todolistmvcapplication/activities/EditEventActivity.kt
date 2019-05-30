@@ -64,10 +64,10 @@ class EditEventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         btnSelectTime.setOnClickListener {
             showDatePicker()
         }
-        if (mEvent.eventName.isNotEmpty()) {
+        if (mEvent.eventName!!.isNotEmpty()) {
             edtEventName.setText(mEvent.eventName)
         }
-        if (mEvent.eventDescription.isNotEmpty()) {
+        if (mEvent.eventDescription!!.isNotEmpty()) {
             edtEventDescription.setText(mEvent.eventDescription)
         }
         if (mEvent.eventTime != null) {

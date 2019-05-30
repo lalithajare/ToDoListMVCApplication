@@ -1,6 +1,7 @@
 package com.example.todolistmvcapplication.activities
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.example.todolistmvcapplication.adapters.EventAdapter
 import com.example.todolistmvcapplication.models.Event
 import com.example.todolistmvcapplication.utils.MyApplication
 import com.example.todolistmvcapplication.utils.Utils
+import com.example.todolistmvcapplication.viewmodels.EventViewModel
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private val eventViewModel = MyApplication.viewModelFactory?.create(EventViewModel::class.java)
     private lateinit var mEventAdapter: EventAdapter
     private val mEventList = ArrayList<Event>()
 
@@ -61,61 +64,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun setData() {
-        GetEventsTask(this).execute()
-    }
-
-    /**
-     * This task is used to add the event in DB
-     * Its used immediately after filled 'Event' object is returned by 'AddEventActivity' in 'onActivityResult()'
-     */
-    private class InsertEventTask(var context: MainActivity, var event: Event) : AsyncTask<Void, Void, Boolean>() {
-        override fun doInBackground(vararg params: Void?): Boolean {
-            MyApplication.getInstance().eventDB!!.eventDao().insertEvent(event)
-            return true
-        }
-
-        override fun onPostExecute(bool: Boolean?) {
-            if (bool!!) {
-                Utils.showToast(context.getString(R.string.event_added_to_db))
-            }
-        }
-    }
-
-    /**
-     * This task is used to update the event in DB
-     * Its used immediately after filled 'Event' object is returned by 'EditEventActivity' in 'onActivityResult()'
-     */
-    private class UpdateEventTask(var context: MainActivity, var event: Event) : AsyncTask<Void, Void, Boolean>() {
-        override fun doInBackground(vararg params: Void?): Boolean {
-            MyApplication.getInstance().eventDB!!.eventDao().updateEvent(event)
-            return true
-        }
-
-        override fun onPostExecute(bool: Boolean?) {
-            if (bool!!) {
-                Utils.showToast(context.getString(R.string.event_updated_in_db))
-            }
-        }
-    }
-
-    /**
-     * This task is used to fill the events list at beginning
-     */
-    private class GetEventsTask(var context: MainActivity) : AsyncTask<Void, Void, List<Event>>() {
-        override fun doInBackground(vararg params: Void?): List<Event> {
-            return MyApplication.getInstance().eventDB!!.eventDao().getEvents()
-        }
-
-        override fun onPostExecute(eventList: List<Event>?) {
-            if (eventList.isNullOrEmpty()) {
-                context.txtNoData.visibility = View.VISIBLE
+        eventViewModel?.getEvents()?.observe(this, Observer<ArrayList<Event>> { list ->
+            if (list.isNullOrEmpty()) {
+                txtNoData.visibility = View.VISIBLE
             } else {
-                context.txtNoData.visibility = View.GONE
-                context.mEventList.addAll(eventList)
-                context.mEventAdapter.notifyDataSetChanged()
+                txtNoData.visibility = View.GONE
+                mEventList.addAll(list)
+                mEventAdapter.notifyDataSetChanged()
             }
-        }
+        })
     }
+
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -141,7 +100,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 mEventList.add(event)
                 mEventAdapter.notifyItemInserted(mEventList.lastIndex)
                 txtNoData.visibility = View.GONE
-                InsertEventTask(this, event).execute()
+                eventViewModel?.insertEvent(event)
             } else if (requestCode == EditEventActivity.REQ_EDIT_EVENT) {
                 val event = data.getSerializableExtra(AddEventActivity.EVENT_OBJ) as Event
 
@@ -150,7 +109,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         mEventList.removeAt(i)
                         mEventList.add(i, event)
                         mEventAdapter.notifyItemChanged(i)
-                        UpdateEventTask(this, event).execute()
+                        eventViewModel?.updateEvent(event)
                         break
                     }
                 }
