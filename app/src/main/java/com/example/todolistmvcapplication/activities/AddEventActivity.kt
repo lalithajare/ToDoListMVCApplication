@@ -22,10 +22,11 @@ import android.databinding.DataBindingUtil
 import com.example.todolistmvcapplication.databinding.ActivityAddEventBinding
 import com.example.todolistmvcapplication.databinding.ActivityLoginBinding
 import com.example.todolistmvcapplication.utils.DateTimePickerHandler
+import com.example.todolistmvcapplication.utils.EventTimeListener
 import java.text.ParseException
 
 
-class AddEventActivity : AppCompatActivity() {
+class AddEventActivity : AppCompatActivity(), EventTimeListener {
 
     companion object {
         const val REQ_ADD_EVENT = 34
@@ -50,7 +51,7 @@ class AddEventActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val handler = DateTimePickerHandler()
+        val handler = DateTimePickerHandler(this)
 
         val activityBinding = DataBindingUtil.setContentView<ActivityAddEventBinding>(this, R.layout.activity_add_event)
         activityBinding.event = mEvent
@@ -104,5 +105,10 @@ class AddEventActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onTimeSet(event: Event) {
+        mEvent = event
+    }
+
 
 }

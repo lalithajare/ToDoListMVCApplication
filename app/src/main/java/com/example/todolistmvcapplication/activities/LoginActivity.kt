@@ -41,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
                         if (edtPassword.text.toString().trim().length > 5) {
                             Utils.showToast("email : ${user.email}  password : ${user.password}")
                             MainActivity.beginActivity(this)
+                            finish()
                         } else
                             Utils.showToast(getString(R.string.password_length_should_be_atleast_6))
                     else

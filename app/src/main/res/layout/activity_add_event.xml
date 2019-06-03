@@ -51,7 +51,7 @@
                     style="@style/TextStyle"
                     android:layout_weight="1"
                     android:textSize="@dimen/text_size_18"
-                    android:text="@{DataConverter.dateToString(event.eventTime)}"/>
+                    android:text="@={DataConverter.dateToString(event.eventTime)}"/>
 
             <Button
                     android:text="@string/select"
