@@ -8,7 +8,7 @@ import android.widget.TimePicker
 import com.example.todolistmvcapplication.models.Event
 import java.util.*
 
-class DateTimePickerHandler(private var eventTimeListener: EventTimeListener) : DatePickerDialog.OnDateSetListener,
+class DateTimePickerHandler : DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 
 
@@ -51,8 +51,6 @@ class DateTimePickerHandler(private var eventTimeListener: EventTimeListener) : 
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         calendar.set(Calendar.MINUTE, minute)
         mEvent?.eventTime = calendar.time
-
-        eventTimeListener.onTimeSet(mEvent!!)
     }
 
 }

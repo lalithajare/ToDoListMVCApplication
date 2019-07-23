@@ -1,27 +1,22 @@
 package com.example.todolistmvcapplication.activities
 
 import android.app.Activity
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
 import com.example.todolistmvcapplication.R
-import com.example.todolistmvcapplication.databinding.ActivityAddEventBinding
 import com.example.todolistmvcapplication.databinding.ActivityEditEventBinding
 import com.example.todolistmvcapplication.models.Event
-import com.example.todolistmvcapplication.utils.DateFormatter
 import com.example.todolistmvcapplication.utils.DateTimePickerHandler
-import com.example.todolistmvcapplication.utils.EventTimeListener
 import com.example.todolistmvcapplication.utils.Utils
-import java.text.ParseException
 import java.util.*
 
-class EditEventActivity : AppCompatActivity(), EventTimeListener {
+class EditEventActivity : AppCompatActivity() {
 
     companion object {
         const val REQ_EDIT_EVENT = 35
@@ -51,15 +46,19 @@ class EditEventActivity : AppCompatActivity(), EventTimeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val handler = DateTimePickerHandler(this)
+        val handler = DateTimePickerHandler()
         mEvent = intent.getSerializableExtra(EVENT_OBJ) as Event
-        val activityBinding = DataBindingUtil.setContentView<ActivityEditEventBinding>(this, R.layout.activity_edit_event)
+        val activityBinding =
+            DataBindingUtil.setContentView<ActivityEditEventBinding>(this, R.layout.activity_edit_event)
+
         activityBinding.event = mEvent
         activityBinding.handler = handler
+//        activityBinding.setAc
+
+//        Handler().postDelayed({mEvent.eventTime = Date() },3000)
 
         actionBar?.title = getString(R.string.edit_event)
         initViews()
-        setViews()
     }
 
     private fun initViews() {
@@ -67,18 +66,6 @@ class EditEventActivity : AppCompatActivity(), EventTimeListener {
         txtEventTime = findViewById(R.id.txt_event_time)
         btnSelectTime = findViewById(R.id.btn_select_time)
         edtEventDescription = findViewById(R.id.edt_event_description)
-    }
-
-    private fun setViews() {
-        if (mEvent.eventName!!.isNotEmpty()) {
-            edtEventName.setText(mEvent.eventName)
-        }
-        if (mEvent.eventDescription!!.isNotEmpty()) {
-            edtEventDescription.setText(mEvent.eventDescription)
-        }
-        if (mEvent.eventTime != null) {
-            txtEventTime.text = DateFormatter.getStringFromDate(mEvent.eventTime!!, DateFormatter.dd_MM_yyyy_HH_mm)
-        }
     }
 
 
@@ -110,7 +97,7 @@ class EditEventActivity : AppCompatActivity(), EventTimeListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.action_done) {
-            if(prepareEventModel()) {
+            if (prepareEventModel()) {
                 intent.putExtra(EVENT_OBJ, mEvent)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
@@ -120,7 +107,4 @@ class EditEventActivity : AppCompatActivity(), EventTimeListener {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onTimeSet(event: Event) {
-//        mEvent = event
-    }
 }

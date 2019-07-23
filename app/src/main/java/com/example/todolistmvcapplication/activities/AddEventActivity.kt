@@ -1,32 +1,24 @@
 package com.example.todolistmvcapplication.activities
 
 import android.app.Activity
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TextView
 import com.example.todolistmvcapplication.R
 import com.example.todolistmvcapplication.models.Event
-import com.example.todolistmvcapplication.utils.DateFormatter
 import com.example.todolistmvcapplication.utils.Utils
 import java.util.*
-import android.widget.TimePicker
-import android.app.TimePickerDialog
 import android.databinding.DataBindingUtil
 import com.example.todolistmvcapplication.databinding.ActivityAddEventBinding
-import com.example.todolistmvcapplication.databinding.ActivityLoginBinding
 import com.example.todolistmvcapplication.utils.DateTimePickerHandler
-import com.example.todolistmvcapplication.utils.EventTimeListener
-import java.text.ParseException
 
 
-class AddEventActivity : AppCompatActivity(), EventTimeListener {
+class AddEventActivity : AppCompatActivity() {
 
     companion object {
         const val REQ_ADD_EVENT = 34
@@ -41,7 +33,7 @@ class AddEventActivity : AppCompatActivity(), EventTimeListener {
         }
     }
 
-    private var mEvent = Event(0, "", Date(), "")
+    private var mEvent = Event(0)
 
     private lateinit var edtEventName: EditText
     private lateinit var txtEventTime: TextView
@@ -51,7 +43,7 @@ class AddEventActivity : AppCompatActivity(), EventTimeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val handler = DateTimePickerHandler(this)
+        val handler = DateTimePickerHandler()
 
         val activityBinding = DataBindingUtil.setContentView<ActivityAddEventBinding>(this, R.layout.activity_add_event)
         activityBinding.event = mEvent
@@ -105,10 +97,5 @@ class AddEventActivity : AppCompatActivity(), EventTimeListener {
         }
         return super.onOptionsItemSelected(item)
     }
-
-    override fun onTimeSet(event: Event) {
-        mEvent = event
-    }
-
 
 }
