@@ -73,6 +73,11 @@ steps:
     SonarCloud: 'sonar'
     organization: 'silicuslalit'
     scannerMode: 'Other'
+    extraProperties: 
+       'sonar.organization=silicuslalit,
+        sonar.sources=java,
+        sonar.branch.name=master,
+        sonar.branch.target=master'
 
 - task: SonarCloudAnalyze@1
 
