@@ -43,23 +43,38 @@ steps:
 
 # - script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
 
+# - task: SonarCloudPrepare@1
+#   inputs:
+#     SonarCloud: 'sonar'
+#     organization: 'lalit'
+#     scannerMode: 'CLI'
+#     configMode: 'manual'
+#     cliProjectKey: 'ToDoApp'
+#     cliProjectName: 'ToDoApp'
+#     cliSources: '$(system.defaultworkingdirectory)'
+#     extraProperties: 
+#        'sonar.organization=lalit,
+#         sonar.sources=java,
+#         sonar.branch.name=master,
+#         sonar.branch.target=master,
+#         sonar.projectVersion=1.0,
+#         sonar.java.coverage.reportPath=Coverage.report,
+#         sonar.java.coverage.reportPattern=sonar-reports/coverage*.xml'
+
+# - task: SonarCloudAnalyze@1
+
+# - task: SonarCloudPublish@1
+#   inputs:
+#     pollingTimeoutSec: '300'
+
+
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'sonar'
-    organization: 'lalit'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'ToDoApp'
-    cliProjectName: 'ToDoApp'
-    cliSources: '$(system.defaultworkingdirectory)'
-    extraProperties: 
-       'sonar.organization=lalit,
-        sonar.sources=java,
-        sonar.branch.name=master,
-        sonar.branch.target=master,
-        sonar.projectVersion=1.0,
-        sonar.java.coverage.reportPath=Coverage.report,
-        sonar.java.coverage.reportPattern=sonar-reports/coverage*.xml'
+    organization: 'silicuslalit'
+    scannerMode: 'MSBuild'
+    projectKey: 'ToDoTest'
+    projectName: 'ToDoTest'
 
 - task: SonarCloudAnalyze@1
 
