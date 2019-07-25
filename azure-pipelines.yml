@@ -72,9 +72,7 @@ steps:
   inputs:
     SonarCloud: 'sonar'
     organization: 'silicuslalit'
-    scannerMode: 'MSBuild'
-    projectKey: 'ToDoTest'
-    projectName: 'ToDoTest'
+    scannerMode: 'Other'
 
 - task: SonarCloudAnalyze@1
 
