@@ -23,7 +23,7 @@ steps:
 
 
 
-- script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
+# - script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
 
 
 - task: SonarCloudPrepare@1
