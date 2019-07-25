@@ -40,7 +40,7 @@ steps:
     organization: 'lalit'
     scannerMode: 'CLI'
     configMode: 'manual'
-    cliProjectKey: 'da3649de09fd56761b233c0c8996bc52d60f0cb4'
+    cliProjectKey: 'ToDoApp'
     cliProjectName: 'ToDoApp'
     cliSources: '$(system.defaultworkingdirectory)'
     extraProperties: 
