@@ -25,24 +25,21 @@ steps:
 
 
 
-- task: SonarQubePrepare@4
-  inputs:
-    SonarQube: 'Sonar Qube'
-    scannerMode: 'Other'
+# - task: SonarQubePrepare@4
+#   inputs:
+#     SonarQube: 'Sonar Qube'
+#     scannerMode: 'Other'
 
-- task: SonarQubeAnalyze@4
+# - task: SonarQubeAnalyze@4
 
-- script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
+# - script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
 
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'sonar'
     organization: 'lalit'
-    scannerMode: 'CLI'
+    scannerMode: 'Other'
     configMode: 'manual'
-    cliProjectKey: 'ToDoApp'
-    cliProjectName: 'ToDoApp'
-    cliSources: '$(system.defaultworkingdirectory)'
     extraProperties: 
        'sonar.organization=lalit,
         sonar.sources=java,
