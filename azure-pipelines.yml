@@ -32,12 +32,12 @@ steps:
     artifactName: 'drop'
     artifactType: 'container'
 
-- task: SonarQubePrepare@4
-  inputs:
-    SonarQube: 'Sonar Qube Test'
-    scannerMode: 'Other'
+# - task: SonarQubePrepare@4
+#   inputs:
+#     SonarQube: 'Sonar Qube Test'
+#     scannerMode: 'Other'
 
-- task: SonarQubeAnalyze@4
+# - task: SonarQubeAnalyze@4
 
 # - task: SonarQubePublish@4
 #   inputs:
@@ -45,7 +45,7 @@ steps:
 
 # - script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
 
-- task: SonarCloudPrepare@1
+# - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloudTest'
     organization: 'silicuslalit'
@@ -59,6 +59,12 @@ steps:
         sonar.sources=java,
         sonar.branch.name=master,
         sonar.branch.target=master'
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloudTest'
+    organization: 'silicuslalit'
+    scannerMode: 'Other'
 
 - task: SonarCloudAnalyze@1
 
