@@ -63,7 +63,7 @@ steps:
     appFile: 'app/build/outputs/apk/debug/app-debug.apk'
     artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
     frameworkOption: 'espresso'
-    espressoBuildDirectory: 'app/build/outputs/apk/androidTest/debug'
+    espressoBuildDirectory: 'app/build/outputs/apk'
     credentialsOption: 'serviceEndpoint'
     serverEndpoint: 'AppCenterTest'
     appSlug: 'hajare.lalit/TodoList'
