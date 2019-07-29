@@ -61,7 +61,7 @@ steps:
 
 - task: AppCenterTest@1
   inputs:
-    appFile: '**/.androidTest.apk'
+    appFile: '**/androidTest.apk'
     artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
     frameworkOption: 'espresso'
     espressoBuildDirectory: 'app/build/outputs/apk'
