@@ -39,47 +39,47 @@ steps:
 
 - task: SonarQubeAnalyze@4
 
-- task: SonarQubePublish@4
-  inputs:
-    pollingTimeoutSec: '300'
-
-- script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
-
-# - task: SonarCloudPrepare@1
-#   inputs:
-#     SonarCloud: 'sonar'
-#     organization: 'silicuslalit'
-#     scannerMode: 'CLI'
-#     configMode: 'manual'
-#     cliProjectKey: 'ToDoTest'
-#     cliProjectName: 'ToDoTest'
-#     cliSources: '$(system.defaultworkingdirectory)'
-#     extraProperties: 
-#        'sonar.organization=silicuslalit,
-#         sonar.sources=java,
-#         sonar.branch.name=master,
-#         sonar.branch.target=master,
-#         sonar.projectVersion=1.0,
-#         sonar.java.coverage.reportPath=Coverage.report,
-#         sonar.java.coverage.reportPattern=sonar-reports/coverage*.xml'
-
-# - task: SonarCloudAnalyze@1
-
-# - task: SonarCloudPublish@1
+# - task: SonarQubePublish@4
 #   inputs:
 #     pollingTimeoutSec: '300'
+
+# - script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
 
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloudTest'
     organization: 'silicuslalit'
-    scannerMode: 'Other'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'ToDoTest'
+    cliProjectName: 'ToDoTest'
+    cliSources: '$(system.defaultworkingdirectory)'
+    extraProperties: 
+       'sonar.organization=silicuslalit,
+        sonar.sources=java,
+        sonar.branch.name=master,
+        sonar.branch.target=master,
+        sonar.projectVersion=1.0,
+        sonar.java.coverage.reportPath=Coverage.report,
+        sonar.java.coverage.reportPattern=sonar-reports/coverage*.xml'
 
 - task: SonarCloudAnalyze@1
 
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
+
+# - task: SonarCloudPrepare@1
+#   inputs:
+#     SonarCloud: 'SonarCloudTest'
+#     organization: 'silicuslalit'
+#     scannerMode: 'Other'
+
+# - task: SonarCloudAnalyze@1
+
+# - task: SonarCloudPublish@1
+#   inputs:
+#     pollingTimeoutSec: '300'
 
 
 
