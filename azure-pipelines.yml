@@ -61,6 +61,7 @@ steps:
     pollingTimeoutSec: '300'
 
 
+
 # - task: SonarCloudPrepare@1
 #   inputs:
 #     SonarCloud: 'sonar'
