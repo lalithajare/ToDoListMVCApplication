@@ -52,7 +52,7 @@ steps:
   inputs:
     apkFiles: '**/*.apk'
     jarsign: true
-    jarsignerKeystoreFile: '$(system.defaultworkingdirectory)/release-docs/todolist_cicd_release.jks'
+    jarsignerKeystoreFile: '*/release-docs/todolist_cicd_release.jks'
     jarsignerKeystorePassword: 'todocicd'
     jarsignerKeystoreAlias: 'todocicd'
     jarsignerKeyPassword: 'todocicd'
