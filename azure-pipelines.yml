@@ -69,11 +69,6 @@ steps:
     cliProjectKey: '967dcfc8faf76abdbb560889d5087245faa69a5b'
     cliProjectName: 'ToDoTest'
     cliSources: '$(system.defaultworkingdirectory)'
-    extraProperties: 
-       'sonar.organization=silicuslalit,
-        sonar.sources=java,
-        sonar.branch.name=master,
-        sonar.branch.target=master'
 
 - task: SonarCloudAnalyze@1
 
