@@ -46,7 +46,7 @@ steps:
 # - script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
 
 - task: SonarCloudPrepare@1
-inputs:
+  inputs:
     SonarCloud: 'SonarCloudTest'
     organization: 'silicuslalit'
     scannerMode: 'CLI'
@@ -55,10 +55,10 @@ inputs:
     cliProjectName: 'ToDoTest'
     cliSources: '$(system.defaultworkingdirectory)'
     extraProperties: 
-       'sonar.organization=silicuslalit,
-        sonar.sources=java,
-        sonar.branch.name=master,
-        sonar.branch.target=master'
+      #  'sonar.organization=silicuslalit,
+      #   sonar.sources=java,
+      #   sonar.branch.name=master,
+      #   sonar.branch.target=master'
 
 - task: SonarCloudAnalyze@1
 
