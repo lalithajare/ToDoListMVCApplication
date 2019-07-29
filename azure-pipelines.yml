@@ -32,7 +32,16 @@ steps:
     artifactName: 'drop'
     artifactType: 'container'
 
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'Sonar Qube Test'
+    scannerMode: 'Other'
 
+- task: SonarQubeAnalyze@4
+
+- task: SonarQubePublish@4
+  inputs:
+    pollingTimeoutSec: '300'
 
 - script: bash xccov-to-sonarqube-generic.sh Build/Logs/Test/{testpass}.xcresult/{#}_Test/action.xcovreport/*.xccovarchive/ > sonarqube-generic-coverage.xml
 
