@@ -60,10 +60,10 @@ steps:
 
 - task: AppCenterTest@1
   inputs:
-    appFile: '**/app-release.apk'
+    appFile: '**/*.apk'
     artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
     frameworkOption: 'espresso'
-    espressoTestApkFile: '**/app-release.apk'
+    espressoTestApkFile: '**/*.apk'
     credentialsOption: 'serviceEndpoint'
     serverEndpoint: 'AppCenterTest'
     appSlug: 'hajare.lalit/TodoList'
