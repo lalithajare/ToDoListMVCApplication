@@ -14,13 +14,18 @@ import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.runner.AndroidJUnit4
 import com.example.todolistmvcapplication.R
 import com.example.todolistmvcapplication.utils.MyApplication
+import com.microsoft.appcenter.espresso.Factory
 import org.hamcrest.Matchers.not
+import org.junit.After
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
     private val TAG = MainActivityTest::class.java.simpleName
+
+    @Rule
+    var reportHelper = Factory.getReportHelper()
 
     @get:Rule
     val mActivityTestRule = ActivityTestRule(MainActivity::class.java)
@@ -39,6 +44,11 @@ class MainActivityTest {
         Intents.init()
         intending(toPackage("com.example.todolistmvcapplication.activities.AddEventActivity"))
         Espresso.onView(ViewMatchers.withId(R.id.btn_add)).perform(ViewActions.click())
+    }
+
+    @After
+    fun TearDown() {
+        reportHelper.label("Home")
     }
 
 }

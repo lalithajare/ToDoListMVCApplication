@@ -23,11 +23,19 @@ import android.app.Activity
 import android.support.test.espresso.contrib.ActivityResultMatchers
 import android.support.test.espresso.intent.matcher.IntentMatchers
 import com.example.todolistmvcapplication.R
+import com.microsoft.appcenter.espresso.Factory.getReportHelper
+import com.microsoft.appcenter.espresso.ReportHelper
+import com.microsoft.appcenter.espresso.Factory
+import android.R.attr.label
+import org.junit.After
 
 
 class AddEventActivityTest {
 
     private val TAG = AddEventActivityTest::class.java.simpleName
+
+    @Rule
+    var reportHelper = getReportHelper()
 
     @get:Rule
     val mActivityTestRule = ActivityTestRule(AddEventActivity::class.java)
@@ -96,5 +104,9 @@ class AddEventActivityTest {
 
     }
 
+    @After
+    fun TearDown() {
+        reportHelper.label("Add Event")
+    }
 
 }

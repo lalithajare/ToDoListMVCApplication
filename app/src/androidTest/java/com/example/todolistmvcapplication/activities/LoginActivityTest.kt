@@ -21,11 +21,16 @@ import android.support.test.espresso.intent.Intents
 import android.support.test.espresso.intent.matcher.IntentMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import android.view.View
+import com.microsoft.appcenter.espresso.Factory
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.not
+import org.junit.After
 
 
 class LoginActivityTest {
+
+    @Rule
+    var reportHelper = Factory.getReportHelper()
 
     @get:Rule
     val mActivityTestRule = ActivityTestRule(LoginActivity::class.java)
@@ -152,6 +157,11 @@ class LoginActivityTest {
         Intents.intending(IntentMatchers.toPackage("com.example.todolistmvcapplication.activities.MainActivity"))
         Espresso.onView(ViewMatchers.withId(R.id.btn_login)).perform(ViewActions.click())
 
+    }
+
+    @After
+    fun TearDown() {
+        reportHelper.label("Login")
     }
 
 }

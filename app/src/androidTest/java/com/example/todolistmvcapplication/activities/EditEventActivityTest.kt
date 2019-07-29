@@ -25,11 +25,16 @@ import java.util.*
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.intent.Intents
 import com.example.todolistmvcapplication.R
+import com.microsoft.appcenter.espresso.Factory
+import org.junit.After
 
 
 class EditEventActivityTest {
 
     private val TAG = EditEventActivityTest::class.java.simpleName
+
+    @Rule
+    var reportHelper = Factory.getReportHelper()
 
     @get:Rule
     val mActivityTestRule = object : ActivityTestRule<EditEventActivity>(EditEventActivity::class.java, true, true) {
@@ -111,6 +116,11 @@ class EditEventActivityTest {
             ActivityResultMatchers.hasResultData(IntentMatchers.hasExtraWithKey(AddEventActivity.EVENT_OBJ))
         )
 
+    }
+
+    @After
+    fun TearDown() {
+        reportHelper.label("Edit Event")
     }
 
 }
