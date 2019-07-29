@@ -60,7 +60,7 @@ steps:
 
 - task: AppCenterTest@1
   inputs:
-    appFile: '**/*.apk'
+    appFile: '**/*app-release.apk'
     artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
     frameworkOption: 'espresso'
     espressoTestApkFile: '**/*.apk'
@@ -69,5 +69,7 @@ steps:
     appSlug: 'hajare.lalit/TodoList'
     devices: 'hajare.lalit/initialdeviceset'
     localeOption: 'en_US'
+
+
 
 
