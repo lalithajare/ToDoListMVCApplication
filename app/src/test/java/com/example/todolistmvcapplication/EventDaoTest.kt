@@ -13,14 +13,13 @@ class EventDaoTest {
     //Non-zero Long return value, to test whether values are inserting
     @Test
     fun insertEventTest() {
+        val event = Event(0)
+        event.eventName = "TestEvent"
+        event.eventTime = Date()
+        event.eventDescription = "xyz event is awesome"
         assertNotEquals(
             MyApplication.getInstance().eventDB!!.eventDao().insertEvent(
-                Event(
-                    0,
-                    "TestEvent",
-                    Date(),
-                    "xyz event is awesome"
-                )
+                event
             ), 0
         )
     }
@@ -28,14 +27,13 @@ class EventDaoTest {
     //Non-zero Int return value, to test whether values are updated
     @Test
     fun updateEventTest() {
+        val event = Event(0)
+        event.eventName = "TestEvent"
+        event.eventTime = Date()
+        event.eventDescription = "xyz event is awesome"
         assertNotEquals(
             MyApplication.getInstance().eventDB!!.eventDao().updateEvent(
-                Event(
-                    1,
-                    "TestEvent",
-                    Date(),
-                    "xyz event is awesome"
-                )
+                event
             ), 0
         )
     }
