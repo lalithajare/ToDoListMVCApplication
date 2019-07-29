@@ -58,29 +58,6 @@ steps:
 #     jarsignerKeyPassword: 'todocicd'
 #     zipalign: true
 
-- task: AndroidSigning@3
-  inputs:
-    apkFiles: '**/*.apk'
-    apksignerKeystoreFile: '**/*.jks'
-    apksignerKeystorePassword: 'todocicd'
-    apksignerKeystoreAlias: 'todocicd'
-    apksignerKeyPassword: 'todocicd'
-
-- task: Gradle@2
-  inputs:
-    gradleWrapperFile: 'gradlew'
-    tasks: 'build'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    testRunTitle: 'first test build'
-    codeCoverageToolOption: 'JaCoCo'
-    javaHomeOption: 'JDKVersion'
-    sonarQubeRunAnalysis: true
-    sqGradlePluginVersionChoice: 'specify'
-    sonarQubeGradlePluginVersion: '2.6.1'
-    checkStyleRunAnalysis: true
-    findBugsRunAnalysis: true
-    pmdRunAnalysis: true
 
 
 
