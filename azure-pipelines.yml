@@ -58,12 +58,23 @@ steps:
     apksignerKeyPassword: 'todocicd'
     zipalign: false
 
+# - task: AppCenterTest@1
+#   inputs:
+#     appFile: 'app/build/outputs/apk/debug/app-debug.apk'
+#     artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
+#     frameworkOption: 'espresso'
+#     espressoBuildDirectory: 'app/build/outputs/apk'
+#     credentialsOption: 'serviceEndpoint'
+#     serverEndpoint: 'AppCenterTest'
+#     appSlug: 'hajare.lalit/TodoList'
+#     devices: 'hajare.lalit/initialdeviceset'
+#     localeOption: 'en_US'
+
 - task: AppCenterTest@1
   inputs:
     appFile: 'app/build/outputs/apk/debug/app-debug.apk'
     artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
     frameworkOption: 'espresso'
-    espressoBuildDirectory: 'app/build/outputs/apk'
     credentialsOption: 'serviceEndpoint'
     serverEndpoint: 'AppCenterTest'
     appSlug: 'hajare.lalit/TodoList'
