@@ -48,23 +48,6 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-# - task: AndroidSigning@2
-#   inputs:
-#     apkFiles: '**/*.apk'
-#     jarsign: true
-#     jarsignerKeystoreFile: '*/release-docs/todolist_cicd_release.jks'
-#     jarsignerKeystorePassword: 'todocicd'
-#     jarsignerKeystoreAlias: 'todocicd'
-#     jarsignerKeyPassword: 'todocicd'
-#     zipalign: true
-
-# - task: AndroidSigning@3
-#   inputs:
-#     apkFiles: '**/*.apk'
-#     apksignerKeystoreFile: 'todolist_cicd_release.jks'
-#     apksignerKeystorePassword: 'todocicd'
-#     apksignerKeystoreAlias: 'todocicd'
-#     apksignerKeyPassword: 'todocicd'
 
 - task: AndroidSigning@3
   inputs:
@@ -75,6 +58,16 @@ steps:
     apksignerKeyPassword: 'todocicd'
     zipalign: false
 
-
+- task: AppCenterTest@1
+  inputs:
+    appFile: '**/app-release.apk'
+    artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
+    frameworkOption: 'espresso'
+    espressoTestApkFile: '**/app-release.apk'
+    credentialsOption: 'serviceEndpoint'
+    serverEndpoint: 'AppCenterTest'
+    appSlug: 'hajare.lalit/TodoList'
+    devices: 'hajare.lalit/initialdeviceset'
+    localeOption: 'en_US'
 
 
