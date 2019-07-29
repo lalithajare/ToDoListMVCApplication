@@ -58,6 +58,14 @@ steps:
 #     jarsignerKeyPassword: 'todocicd'
 #     zipalign: true
 
+# - task: AndroidSigning@3
+#   inputs:
+#     apkFiles: '**/*.apk'
+#     apksignerKeystoreFile: 'todolist_cicd_release.jks'
+#     apksignerKeystorePassword: 'todocicd'
+#     apksignerKeystoreAlias: 'todocicd'
+#     apksignerKeyPassword: 'todocicd'
+
 - task: AndroidSigning@3
   inputs:
     apkFiles: '**/*.apk'
@@ -65,7 +73,7 @@ steps:
     apksignerKeystorePassword: 'todocicd'
     apksignerKeystoreAlias: 'todocicd'
     apksignerKeyPassword: 'todocicd'
-
+    zipalign: false
 
 
 
