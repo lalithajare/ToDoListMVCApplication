@@ -59,17 +59,32 @@ steps:
     zipalign: false
 
 
-- task: AppCenterTest@1
+# - task: AppCenterTest@1
+#   inputs:
+#     appFile: '**/androidTest.apk'
+#     artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
+#     frameworkOption: 'espresso'
+#     espressoBuildDirectory: 'app/build/outputs/apk'
+#     credentialsOption: 'serviceEndpoint'
+#     serverEndpoint: 'AppCenterTest'
+#     appSlug: 'hajare.lalit/TodoList'
+#     devices: 'hajare.lalit/initialdeviceset'
+#     localeOption: 'en_US'
+
+
+- task: AppCenterDistribute@3
   inputs:
-    appFile: '**/androidTest.apk'
-    artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
-    frameworkOption: 'espresso'
-    espressoBuildDirectory: 'app/build/outputs/apk'
-    credentialsOption: 'serviceEndpoint'
     serverEndpoint: 'AppCenterTest'
     appSlug: 'hajare.lalit/TodoList'
-    devices: 'hajare.lalit/initialdeviceset'
-    localeOption: 'en_US'
+    appFile: 'app/build/outputs/apk/debug/app-debug.apk'
+    symbolsOption: 'Android'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'initial release'
+    isMandatory: true
+    destinationType: 'store'
+    destinationStoreId: '0727e134-59b5-4f65-800e-ad9ebf4f5f3b'
+
+
 
 
 
