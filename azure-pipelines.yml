@@ -76,7 +76,7 @@ steps:
   inputs:
     serverEndpoint: 'AppCenterTest'
     appSlug: 'hajare.lalit/TodoList'
-    appFile: 'app/build/outputs/apk/debug/app-debug.apk'
+    appFile: 'app/release/app-release.apk'
     symbolsOption: 'Android'
     releaseNotesOption: 'input'
     releaseNotesInput: 'initial release'
