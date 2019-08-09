@@ -59,19 +59,6 @@ steps:
     zipalign: false
 
 
-# - task: AppCenterTest@1
-#   inputs:
-#     appFile: '**/androidTest.apk'
-#     artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
-#     frameworkOption: 'espresso'
-#     espressoBuildDirectory: 'app/build/outputs/apk'
-#     credentialsOption: 'serviceEndpoint'
-#     serverEndpoint: 'AppCenterTest'
-#     appSlug: 'hajare.lalit/TodoList'
-#     devices: 'hajare.lalit/initialdeviceset'
-#     localeOption: 'en_US'
-
-
 - task: AppCenterDistribute@3
   inputs:
     serverEndpoint: 'AppCenterTest'
