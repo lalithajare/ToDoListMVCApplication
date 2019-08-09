@@ -29,6 +29,7 @@ class AddEventActivity : AppCompatActivity() {
         }
 
         fun beginActivityForResult(activity: AppCompatActivity) {
+            
             activity.startActivityForResult(Intent(activity, AddEventActivity::class.java), REQ_ADD_EVENT)
         }
     }
