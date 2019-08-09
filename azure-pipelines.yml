@@ -6,70 +6,71 @@
 #latest
 
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'macos-latest'
 
 steps:
-- task: Gradle@2
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'assembleDebug'
+  - task: Gradle@2
+    inputs:
+      workingDirectory: ''
+      gradleWrapperFile: 'gradlew'
+      gradleOptions: '-Xmx3072m'
+      publishJUnitResults: false
+      testResultsFiles: '**/TEST-*.xml'
+      tasks: 'assembleDebug'
 
-- task: CopyFiles@2
-  inputs:
-    contents: '**/*.apk'
-    targetFolder: '$(build.artifactStagingDirectory)'
+  - task: CopyFiles@2
+    inputs:
+      contents: '**/*.apk'
+      targetFolder: '$(build.artifactStagingDirectory)'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(build.artifactStagingDirectory)'
-    artifactName: 'drop'
-    artifactType: 'container'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: '$(build.artifactStagingDirectory)'
+      artifactName: 'drop'
+      artifactType: 'container'
 
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloudTest'
-    organization: 'silicuslalit'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: '967dcfc8faf76abdbb560889d5087245faa69a5b'
-    cliProjectName: 'ToDoTest'
-    cliSources: '$(system.defaultworkingdirectory)'
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'SonarCloudTest'
+      organization: 'silicuslalit'
+      scannerMode: 'CLI'
+      configMode: 'manual'
+      cliProjectKey: '967dcfc8faf76abdbb560889d5087245faa69a5b'
+      cliProjectName: 'ToDoTest'
+      cliSources: '$(system.defaultworkingdirectory)'
 
-- task: SonarCloudAnalyze@1
+  - task: SonarCloudAnalyze@1
 
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
-
-
-- task: AndroidSigning@3
-  inputs:
-    apkFiles: '**/*.apk'
-    apksignerKeystoreFile: 'todolist_cicd_release.jks'
-    apksignerKeystorePassword: 'todocicd'
-    apksignerKeystoreAlias: 'todocicd'
-    apksignerKeyPassword: 'todocicd'
-    zipalign: false
+  - task: SonarCloudPublish@1
+    inputs:
+      pollingTimeoutSec: '300'
 
 
-- task: AppCenterDistribute@3
-  inputs:
-    serverEndpoint: 'AppCenterTest'
-    appSlug: 'hajare.lalit/TodoList'
-    appFile: 'app/release/app-release.apk'
-    symbolsOption: 'Android'
-    releaseNotesOption: 'input'
-    releaseNotesInput: 'initial release'
-    isMandatory: true
-    destinationType: 'store'
-    destinationStoreId: '0727e134-59b5-4f65-800e-ad9ebf4f5f3b'
+  - task: AndroidSigning@3
+    inputs:
+      apkFiles: '**/*.apk'
+      apksignerKeystoreFile: 'todolist_cicd_release.jks'
+      apksignerKeystorePassword: 'todocicd'
+      apksignerKeystoreAlias: 'todocicd'
+      apksignerKeyPassword: 'todocicd'
+      zipalign: false
+
+
+
+  - task: AppCenterDistribute@3
+    inputs:
+      serverEndpoint: 'AppCenterTest'
+      appSlug: 'hajare.lalit/TodoList'
+      appFile: 'app/release/app-release.apk'
+      symbolsOption: 'Android'
+      releaseNotesOption: 'input'
+      releaseNotesInput: 'initial release'
+      isMandatory: true
+      destinationType: 'store'
+      destinationStoreId: '0727e134-59b5-4f65-800e-ad9ebf4f5f3b'
 
 
 

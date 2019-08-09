@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.todolistmvcapplication.database.EventDatabase
 
 class MyApplication : Application() {
 
