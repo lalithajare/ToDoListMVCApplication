@@ -47,6 +47,7 @@ class AddEventActivity : AppCompatActivity() {
 
         val activityBinding = DataBindingUtil.setContentView<ActivityAddEventBinding>(this, R.layout.activity_add_event)
         activityBinding.event = mEvent
+        
         activityBinding.handler = handler
 
         actionBar?.title = getString(R.string.add_event)
