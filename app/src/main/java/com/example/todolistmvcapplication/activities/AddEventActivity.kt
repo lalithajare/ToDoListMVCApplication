@@ -25,7 +25,7 @@ class AddEventActivity : AppCompatActivity() {
         const val EVENT_OBJ = "event_object"
 
         fun beginActivity(activity: AppCompatActivity) {
-            
+
             activity.startActivity(Intent(activity, AddEventActivity::class.java))
         }
 

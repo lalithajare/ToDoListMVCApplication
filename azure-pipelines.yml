@@ -32,6 +32,25 @@ steps:
       artifactName: 'drop'
       artifactType: 'container'
 
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '/Users/vsts/agent/2.154.3/work/1/s/app/build/reports/tests/testDebugUnitTest/index.html'
+      searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+      mergeTestResults: true
+      failTaskOnFailedTests: false
+      #testRunTitle: # Optional
+      #buildPlatform: # Optional
+      #buildConfiguration: # Optional
+      publishRunAttachments: true
+
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'JaCoCo'
+      summaryFileLocation: '/Users/vsts/agent/2.154.3/work/1/s/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+      reportDirectory: '/Users/vsts/agent/2.154.3/work/1/s/app/build/reports/jacoco/jacocoTestReport/html'
+
+
   - task: SonarCloudPrepare@1
     inputs:
       SonarCloud: 'SonarCloudTest'
@@ -57,7 +76,6 @@ steps:
       apksignerKeystoreAlias: 'todocicd'
       apksignerKeyPassword: 'todocicd'
       zipalign: false
-
 
 
   - task: AppCenterDistribute@3
