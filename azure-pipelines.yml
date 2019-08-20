@@ -33,23 +33,22 @@ steps:
       artifactType: 'container'
 
   - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: '/Users/vsts/agent/2.155.1/work/1/a/app/build/reports/tests/testDebugUnitTest/index.html'
-      searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
-      mergeTestResults: true
-      failTaskOnFailedTests: false
-      #testRunTitle: # Optional
-      #buildPlatform: # Optional
-      #buildConfiguration: # Optional
-      publishRunAttachments: true
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '/Users/vsts/agent/2.155.1/work/1/s/app/build/reports/tests/testDebugUnitTest/index.html'
+        searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+        mergeTestResults: true
+        failTaskOnFailedTests: false
+        #testRunTitle: # Optional
+        #buildPlatform: # Optional
+        #buildConfiguration: # Optional
+        publishRunAttachments: true
 
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: 'JaCoCo'
-      summaryFileLocation: '/Users/vsts/agent/2.155.1/work/1/a/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
-      reportDirectory: '/Users/vsts/agent/2.155.1/work/1/a/app/build/reports/jacoco/jacocoTestReport/html'
-
+      summaryFileLocation: '/Users/vsts/agent/2.155.1/work/1/s/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+      reportDirectory: '/Users/vsts/agent/2.155.1/work/1/s/app/build/reports/jacoco/jacocoTestReport/html'
 
   - task: SonarCloudPrepare@1
     inputs:
