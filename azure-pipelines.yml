@@ -66,12 +66,13 @@ steps:
       summaryFileLocation: '/Users/vsts/agent/2.155.1/work/1/s/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
       reportDirectory: '/Users/vsts/agent/2.155.1/work/1/s/app/build/reports/jacoco/jacocoTestReport/html'
   
-  - script:
-      ./gradlew sonarqube
-      -Dsonar.projectKey=967dcfc8faf76abdbb560889d5087245faa69a5b
-      -Dsonar.organization=silicuslalit
-      -Dsonar.host.url=https://sonarcloud.io
-      -Dsonar.login=967dcfc8faf76abdbb560889d5087245faa69a5b
+  # - script:
+  #     ./gradlew sonarqube
+  #     -Dsonar.projectKey=967dcfc8faf76abdbb560889d5087245faa69a5b
+  #     -Dsonar.organization=silicuslalit
+  #     -Dsonar.host.url=https://sonarcloud.io
+  #     -Dsonar.login=967dcfc8faf76abdbb560889d5087245faa69a5b
+  
   - task: SonarCloudPrepare@1
     inputs:
       SonarCloud: 'SonarCloudTest'
