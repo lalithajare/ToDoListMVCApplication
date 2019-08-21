@@ -35,7 +35,7 @@ steps:
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
-      testResultsFiles: '/Users/vsts/agent/2.155.1/work/1/a/app/build/reports/tests/testDebugUnitTest/index.html'
+      testResultsFiles: '$(build.artifactStagingDirectory)/app/build/reports/tests/testDebugUnitTest/index.html'
       searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
       mergeTestResults: true
       failTaskOnFailedTests: false
@@ -47,8 +47,8 @@ steps:
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: 'JaCoCo'
-      summaryFileLocation: '/Users/vsts/agent/2.155.1/work/1/a/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
-      reportDirectory: '/Users/vsts/agent/2.155.1/work/1/a/app/build/reports/jacoco/jacocoTestReport/html'
+      summaryFileLocation: '$(build.artifactStagingDirectory)/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+      reportDirectory: '$(build.artifactStagingDirectory)/app/build/reports/jacoco/jacocoTestReport/html'
 
 
   - task: SonarCloudPrepare@1
