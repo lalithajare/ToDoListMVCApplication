@@ -21,6 +21,22 @@ steps:
       testResultsFiles: '**/TEST-*.xml'
       tasks: 'assembleDebug'
 
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'testDebugUnitTest'
+
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    tasks: 'jacocoTestReport'
+
   - task: CopyFiles@2
     inputs:
       contents: '**/*.apk'
@@ -35,7 +51,7 @@ steps:
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
-      testResultsFiles: '$(build.artifactStagingDirectory)/app/build/reports/tests/testDebugUnitTest/index.html'
+      testResultsFiles: '/Users/vsts/agent/2.155.1/work/1/s/app/build/reports/tests/testDebugUnitTest/index.html'
       searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
       mergeTestResults: true
       failTaskOnFailedTests: false
@@ -47,9 +63,15 @@ steps:
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: 'JaCoCo'
-      summaryFileLocation: '$(build.artifactStagingDirectory)/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
-      reportDirectory: '$(build.artifactStagingDirectory)/app/build/reports/jacoco/jacocoTestReport/html'
-
+      summaryFileLocation: '/Users/vsts/agent/2.155.1/work/1/s/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+      reportDirectory: '/Users/vsts/agent/2.155.1/work/1/s/app/build/reports/jacoco/jacocoTestReport/html'
+  
+  - script:
+    ./gradlew sonarqube
+    -Dsonar.projectKey=967dcfc8faf76abdbb560889d5087245faa69a5b
+    -Dsonar.organization=silicuslalit
+    -Dsonar.host.url=https://sonarcloud.io
+    -Dsonar.login=967dcfc8faf76abdbb560889d5087245faa69a5b 
 
   - task: SonarCloudPrepare@1
     inputs:
