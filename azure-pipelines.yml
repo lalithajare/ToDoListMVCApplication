@@ -67,6 +67,7 @@ steps:
     inputs:
       pollingTimeoutSec: '300'
 
+#You need to upload jks file in " Libraries >> secure files " in order to sign the APK at azure cloud
 
   - task: AndroidSigning@3
     inputs:
@@ -77,6 +78,8 @@ steps:
       apksignerKeyPassword: 'todocicd'
       zipalign: false
 
+
+#You need to create an account on Azure App Center, Create a distribution group and use group's Id for release of app
 
   - task: AppCenterDistribute@3
     inputs:
